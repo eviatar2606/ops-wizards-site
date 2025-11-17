@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ops Wizards – הנדסת תהליכים ומערכות לעסק שלך</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="ייעוץ, אוטומציה והנדסת תהליכים ומערכות לעסקים בישראל." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --ink: #0f172a;
+      --ink2: #334155;
+      --ink3: #64748b;
+      --line: #e5e7eb;
+      --purple: #6d28d9;
+      --teal: #0ea5a4;
+      --white: #ffffff;
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 8px 30px rgba(15, 23, 42, 0.06);
+      --transition: 0.2s ease;
+    }
+    
+    * { 
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html { 
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      direction: rtl;
+      text-align: right;
+    }
+    
+    a { 
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(249, 250, 251, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      flex-direction: row-reverse; /* RTL */
+    }
+    
+    .nav-left {
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, var(--purple), var(--teal));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      font-size: 15px;
+      font-weight: 500;
+      flex-direction: row-reverse; /* RTL */
+    }
+    
+    .nav-links a {
+      position: relative;
+      padding: 4px 0;
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0; /* RTL underline */
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--purple), var(--teal));
+      transition: width var(--transition);
+    }
+    
+    .nav-links a:hover::after,
+    .nav-links a:focus::after {
+      width: 100%;
+    }
+    
+    .nav-links a:focus {
+      outline: 2px solid var(--purple);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+    
+    .menu-btn {
+      display: none;
+      border: none;
+      background: transparent;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 8px;
+      color: var(--ink);
+      transition: var(--transition);
+    }
+    
+    .menu-btn:hover {
+      opacity: 0.7;
+    }
+    
+    .menu-btn:focus {
+      outline: 2px solid var(--purple);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    
+    .mobile-nav {
+      display: none;
+      border-top: 1px solid var(--line);
+      background: var(--bg);
+      animation: slideDown 0.3s ease;
+    }
+    
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .mobile-nav a {
+      display: block;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
+      font-weight: 500;
+      transition: background var(--transition);
+    }
+    
+    .mobile-nav a:hover,
+    .mobile-nav a:focus {
+      background: var(--white);
+    }
+
+    /* SECTIONS */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+    
+    /* HERO */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    
+    h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      margin: 0 0 20px;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    
+    .hero-sub {
+      font-size: 20px;
+      color: var(--ink2);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      padding: 0 32px;
+      border-radius: 12px;
+      border: none;
+      color: white;
+      background: linear-gradient(135deg, var(--purple), var(--teal));
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(109, 40, 217, 0.3);
+      transition: all var(--transition);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(109, 40, 217, 0.4);
+    }
+    
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+    
+    .btn-primary:focus {
+      outline: 3px solid var(--purple);
+      outline-offset: 3px;
+    }
+    
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-lg);
+      padding: 28px;
+      transition: all var(--transition);
+      text-align: right;
+    }
+    
+    .card:hover {
+      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .mini-kicker {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--purple);
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+    
+    .mini-title {
+      margin-top: 12px;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--ink);
+    }
+    
+    .bar-bg {
+      margin-top: 20px;
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--line);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .bar-fill {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple), var(--teal));
+      animation: fillBar 2s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+    
+    @keyframes fillBar {
+      to { width: 66%; }
+    }
+    
+    /* CHAOS TO CLARITY VISUAL */
+    .chaos-visual {
+      margin-top: 20px;
+      width: 100%;
+      height: 80px;
+    }
+    
+    .chaos-visual svg {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .chaos-group .dot {
+      fill: #e5e7eb;
+      animation: chaosPulse 2s ease-in-out infinite;
+    }
+    
+    .chaos-group .dot-1 { animation-delay: 0s; }
+    .chaos-group .dot-2 { animation-delay: 0.2s; }
+    .chaos-group .dot-3 { animation-delay: 0.4s; }
+    .chaos-group .dot-4 { animation-delay: 0.6s; }
+    .chaos-group .dot-5 { animation-delay: 0.8s; }
+    .chaos-group .dot-6 { animation-delay: 1s; }
+    .chaos-group .dot-7 { animation-delay: 1.2s; }
+    .chaos-group .dot-8 { animation-delay: 1.4s; }
+    
+    @keyframes chaosPulse {
+      0%, 100% { 
+        fill: #e5e7eb;
+        opacity: 0.6;
+      }
+      50% { 
+        fill: #cbd5e1;
+        opacity: 1;
+      }
+    }
+    
+    .chaos-line {
+      stroke: #e5e7eb;
+      stroke-width: 1;
+      stroke-dasharray: 3, 3;
+      opacity: 0.3;
+      animation: chaosLineFade 3s ease-in-out infinite;
+    }
+    
+    .line-1 { animation-delay: 0s; }
+    .line-2 { animation-delay: 1s; }
+    .line-3 { animation-delay: 2s; }
+    
+    @keyframes chaosLineFade {
+      0%, 100% { opacity: 0.1; }
+      50% { opacity: 0.4; }
+    }
+    
+    .hub-center {
+      fill: url(#hubGradient);
+      animation: hubPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes hubPulse {
+      0%, 100% { 
+        r: 6;
+        opacity: 1;
+      }
+      50% { 
+        r: 7;
+        opacity: 0.9;
+      }
+    }
+    
+    .satellite {
+      fill: #6d28d9;
+      animation: satelliteGlow 2s.ease-in-out infinite;
+    }
+    
+    .sat-1 { animation-delay: 0s; }
+    .sat-2 { animation-delay: 0.5s; }
+    .sat-3 { animation-delay: 1s; }
+    .sat-4 { animation-delay: 1.5s; }
+    
+    @keyframes satelliteGlow {
+      0%, 100% { 
+        fill: #6d28d9;
+        opacity: 0.7;
+      }
+      50% { 
+        fill: #0ea5a4;
+        opacity: 1;
+      }
+    }
+    
+    .clarity-line {
+      stroke: url(#lineGradient);
+      stroke-width: 1.5;
+      opacity: 0;
+      animation: clarityLineDraw 3s ease-in-out infinite;
+    }
+    
+    .cl-1 { animation-delay: 0.5s; }
+    .cl-2 { animation-delay: 1s; }
+    .cl-3 { animation-delay: 1.5s; }
+    .cl-4 { animation-delay: 2s; }
+    
+    @keyframes clarityLineDraw {
+      0%, 30% { 
+        opacity: 0;
+        stroke-dasharray: 0, 100;
+      }
+      60%, 100% { 
+        opacity: 0.8;
+        stroke-dasharray: 100, 0;
+      }
+    }
+    
+    .arrow-group {
+      opacity: 0.5;
+    }
+    
+    .mini-caption {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--ink3);
+      line-height: 1.5;
+    }
+
+    /* SECTION HEADERS */
+    .section-title {
+      font-size: clamp(28px, 4vw, 36px);
+      margin: 0 0 12px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    
+    .section-kicker {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--purple);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    
+    .section-header {
+      margin-bottom: 40px;
+    }
+    
+    /* PROBLEMS SECTION */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    
+    .pill {
+      font-size: 15px;
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition);
+    }
+    
+    .pill:hover {
+      border-color: var(--purple);
+      box-shadow: 0 8px 24px rgba(109, 40, 217, 0.15);
+      transform: translateY(-2px);
+    }
+    
+    .pill strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 16px;
+    }
+
+    /* SERVICES SECTION */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    
+    .services-card h3 {
+      margin: 0 0 16px;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    
+    .services-card ul {
+      margin: 0;
+      padding-right: 20px; /* RTL */
+      padding-left: 0;
+      color: var(--ink2);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    
+    .services-card li {
+      margin-bottom: 8px;
+    }
+    
+    .services-card li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ALCHEMY SECTION */
+    #alchemy .card p {
+      color: var(--ink2);
+      font-size: 17px;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    /* ABOUT SECTION */
+    #about .card p {
+      color: var(--ink2);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+    
+    #about .card p:first-child {
+      margin: 0 0 16px 0;
+    }
+    
+    #about .card p:last-child {
+      color: var(--ink3);
+      font-size: 14px;
+      font-style: italic;
+      margin: 0;
+    }
+
+    /* PRICING SECTION */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    
+    .pricing-card {
+      position: relative;
+    }
+    
+    .pricing-card:nth-child(2) {
+      border: 2px solid var(--purple);
+    }
+    
+    .pricing-card:nth-child(2)::before {
+      content: 'POPULAR';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--purple), var(--teal));
+      color: white;
+      padding: 4px 16px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    
+    .pricing-card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    
+    .pricing-price {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--purple), var(--teal));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .pricing-note {
+      font-size: 14px;
+      color: var(--ink3);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    
+    .pricing-card ul {
+      margin: 0;
+      padding-right: 20px; /* RTL */
+      padding-left: 0;
+      font-size: 14px;
+      color: var(--ink2);
+      line-height: 1.8;
+    }
+    
+    .pricing-card li {
+      margin-bottom: 8px;
+    }
+    
+    .pricing-disclaimer {
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--ink3);
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* CONTACT SECTION */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 32px;
+      align-items: flex-start;
+    }
+    
+    .contact-sub {
+      font-size: 16px;
+      color: var(--ink2);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    
+    form label {
+      display: block;
+      font-size: 14px;
+      color: var(--ink);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    
+    input, textarea {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      padding: 12px 16px;
+      font-family: inherit;
+      font-size: 15px;
+      transition: all var(--transition);
+      background: var(--white);
+      text-align: right; /* RTL */
+    }
+    
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.1);
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    
+    .field {
+      margin-bottom: 20px;
+    }
+    
+    .book-link {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--purple);
+      border-bottom: 2px solid var(--purple);
+      padding-bottom: 2px;
+      display: inline-block;
+      transition: var(--transition);
+    }
+    
+    .book-link:hover {
+      color: var(--teal);
+      border-color: var(--teal);
+    }
+    
+    #formStatus {
+      margin-top: 16px;
+      font-size: 14px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: #f0fdf4;
+      color: #166534;
+      display: none;
+    }
+    
+    #formStatus.show {
+      display: block;
+    }
+    
+    #contact .card p {
+      margin: 0 0 16px 0;
+      font-size: 15px;
+      color: var(--ink2);
+      line-height: 1.6;
+    }
+    
+    #contact .card p:last-child {
+      margin: 0;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 32px 24px;
+      font-size: 14px;
+      background: var(--white);
+    }
+    
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    
+    .footer-links a {
+      color: var(--ink3);
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    .footer-links a:hover {
+      color: var(--purple);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero-grid,
+      .contact-grid,
+      .services-grid,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .section {
+        padding: 56px 20px;
+      }
+      
+      .nav {
+        padding: 0 20px;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .menu-btn {
+        display: block;
+      }
+      
+      .mobile-nav.open {
+        display: block;
+      }
+      
+      h1 {
+        margin-bottom: 16px;
+      }
+      
+      .hero-sub {
+        font-size: 18px;
+        margin-bottom: 24px;
+      }
+      
+      .section-title {
+        margin-bottom: 8px;
+      }
+      
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .nav {
+        height: 56px;
+      }
+      
+      .nav-left {
+        font-size: 18px;
+      }
+      
+      .btn-primary {
+        width: 100%;
+      }
+      
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header>
+    <div class="nav">
+      <div class="nav-left">
+        <span>Ops</span> <span class="gradient-text">Wizards</span>
+      </div>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#home">דף הבית</a>
+        <a href="#services">שירותים</a>
+        <a href="#about">אודות</a>
+        <a href="#pricing">תמחור</a>
+        <a href="#contact">יצירת קשר</a>
+      </nav>
+      <button class="menu-btn" aria-label="תפריט נייד" aria-expanded="false" onclick="toggleMobileNav()">☰</button>
+    </div>
+    <nav id="mobileNav" class="mobile-nav" aria-label="Mobile navigation">
+      <a href="#home" onclick="toggleMobileNav()">דף הבית</a>
+      <a href="#services" onclick="toggleMobileNav()">שירותים</a>
+      <a href="#about" onclick="toggleMobileNav()">אודות</a>
+      <a href="#pricing" onclick="toggleMobileNav()">תמחור</a>
+      <a href="#contact" onclick="toggleMobileNav()">יצירת קשר</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="section">
+    <div class="hero-grid">
+      <div>
+        <h1>אוטומציה. סדר. תהליכים שעובדים.</h1>
+        <p class="hero-sub">
+          הנדסת תהליכים ומערכות — שמפשטת את העסק שלך ועוזרת לו לרוץ חלק.<br />
+          יותר מדי כלים, יותר מדי ידיים, יותר מדי בלגן?<br />
+          עם ניסיון של מעל 10 שנים בבניית תהליכי RevOps ואוטומציות — נעזור לך לסדר את העסק מבפנים,
+          כדי שתוכל לעבוד בראש שקט ולהתמקד בלקוחות.
+        </p>
+        <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">
+          בואו נעשה סדר בעסק
+        </button>
+      </div>
+      <div class="card chaos-card">
+        <div class="mini-kicker">הנדסת תהליכים ומערכות</div>
+        <div class="mini-title">מחיבור כאוס למערכת תפעול אחת שאפשר לסמוך עליה.</div>
+        <div class="chaos-visual">
+          <svg viewBox="0 0 400 80" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="hubGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#6d28d9;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#0ea5a4;stop-opacity:1" />
+              </linearGradient>
+              <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#6d28d9;stop-opacity:0.6" />
+                <stop offset="100%" style="stop-color:#0ea5a4;stop-opacity:0.6" />
+              </linearGradient>
+            </defs>
+            
+            <!-- Chaos side -->
+            <g class="chaos-group">
+              <circle cx="20" cy="25" r="4" class="dot dot-1" />
+              <circle cx="45" cy="55" r="4" class="dot dot-2" />
+              <circle cx="35" cy="15" r="4" class="dot dot-3" />
+              <circle cx="60" cy="40" r="4" class="dot dot-4" />
+              <circle cx="50" cy="65" r="4" class="dot dot-5" />
+              <circle cx="75" cy="20" r="4" class="dot dot-6" />
+              <circle cx="25" cy="45" r="4" class="dot dot-7" />
+              <circle cx="70" cy="50" r="4" class="dot dot-8" />
+              <line x1="20" y1="25" x2="35" y2="15" class="chaos-line line-1" />
+              <line x1="45" y1="55" x2="50" y2="65" class="chaos-line line-2" />
+              <line x1="60" y1="40" x2="75" y2="20" class="chaos-line line-3" />
+            </g>
+            
+            <!-- Arrow -->
+            <g class="arrow-group">
+              <line x1="130" y1="40" x2="270" y2="40" stroke="#cbd5e1" stroke-width="2" />
+              <polygon points="270,40 260,35 260,45" fill="#cbd5e1" />
+            </g>
+            
+            <!-- Clarity side -->
+            <g class="clarity-group">
+              <circle cx="350" cy="40" r="6" class="hub-center" />
+              <circle cx="320" cy="25" r="4" class="satellite sat-1" />
+              <circle cx="325" cy="55" r="4" class="satellite sat-2" />
+              <circle cx="375" cy="25" r="4" class="satellite sat-3" />
+              <circle cx="380" cy="55" r="4" class="satellite sat-4" />
+              <line x1="350" y1="40" x2="320" y2="25" class="clarity-line cl-1" />
+              <line x1="350" y1="40" x2="325" y2="55" class="clarity-line cl-2" />
+              <line x1="350" y1="40" x2="375" y2="25" class="clarity-line cl-3" />
+              <line x1="350" y1="40" x2="380" y2="55" class="clarity-line cl-4" />
+            </g>
+          </svg>
+        </div>
+        <div class="mini-caption">
+          מכאוס של כלים מפוזרים — למערכת אחת מסודרת וברורה.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEMS -->
+  <section id="problems" class="section">
+    <div class="section-header">
+      <div class="section-kicker">מכאוס — לבהירות תפעולית</div>
+      <h2 class="section-title gradient-text">מה באמת מאט את העסק שלכם היום</h2>
+    </div>
+    <div class="grid-2">
+      <div class="pill">
+        <strong>אינסוף קבצים מפוזרים</strong>
+        אקסלים, טבלאות, מסמכים… הכול חי במקומות שונים ובגרסאות שונות — ואף אחד לא באמת יודע מה העדכני.
+      </div>
+      <div class="pill">
+        <strong>חוסר בהירות לגבי מה קורה בעסק</strong>
+        לא ברור איפה עסקאות תקועות, מה מצב הפרויקטים, ומי אחראי על מה. קשה לנהל, וקשה עוד יותר לקבל החלטות.
+      </div>
+      <div class="pill">
+        <strong>משימות ידניות שחוזרות על עצמן</strong>
+        עדכון מערכות, העתק-הדבק, תיאומים… במקום שירות ללקוחות וצמיחה — הצוות עסוק בתחזוקה.
+      </div>
+      <div class="pill">
+        <strong>יותר מדי מערכות, מעט מאוד תיאום</strong>
+        Monday, CRM, וואטסאפ, מיילים, טפסים… כל כלי עובד לבד. המחיר: טעויות, כפילויות, וזמן יקר שמתבזבז.
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <div class="section-header">
+      <div class="section-kicker">מה אנחנו עושים</div>
+      <h2 class="section-title gradient-text">ייעוץ, אוטומציה ומערכות — שבאמת עובדות</h2>
+    </div>
+    <div class="services-grid">
+      <div class="card services-card">
+        <h3>Consulting &amp; Strategy — ייעוץ ואסטרטגיה</h3>
+        <ul>
+          <li>מיפוי תהליכים לעומק כדי להבין איך העסק עובד היום בפועל</li>
+          <li>איתור חיכוכים ונקודות שמאטות את העסק</li>
+          <li>הגדרת תהליכים ברורים לכל שלב — ממכירות ועד שירות</li>
+          <li>יצירת פלייבוקים ונוהלי עבודה שהצוות יכול ליישם בקלות</li>
+        </ul>
+      </div>
+      <div class="card services-card">
+        <h3>Automation &amp; System Build — אוטומציה ובניית מערכות</h3>
+        <ul>
+          <li>שדרוג או הקמה של CRM שמותאם בול לתהליכים שלכם</li>
+          <li>בניית דשבורדים שמחליפים אקסלים מפוזרים</li>
+          <li>חיבור ואינטגרציה בין הכלים שהעסק כבר עובד איתם</li>
+          <li>אוטומציות שמורידות משימות ידניות מהצוות ביום־יום</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYSTEMS ALCHEMY / ENGINEERING -->
+  <section id="alchemy" class="section">
+    <div class="section-header">
+      <div class="section-kicker">הנדסת תהליכים ומערכות</div>
+      <h2 class="section-title gradient-text">מיועוץ על הנייר → למערכת תפעולית שעובדת לבד</h2>
+    </div>
+    <div class="card">
+      <p>
+        אחרי שיש תכנון ברור — מגיע שלב הבנייה. כאן כל מה שסיכמנו עובר ממסמך למערכת אמיתית שרצה בעסק.
+      </p>
+      <p>
+        במסגרת ההנדסה אנחנו בונים תהליכים בפועל בתוך המערכות, מחברים בין הכלים, יוצרים אוטומציות,
+        ומוודאים שכל נתון זורם למקום הנכון, בזמן הנכון — עם דשבורדים שמחליפים אקסלים ומביאים תמונה אמיתית בזמן אמת.
+      </p>
+      <h3 style="margin-top: 18px; font-size: 16px;">מסלול 1 — שדרוג ואופטימיזציה של מערכת קיימת</h3>
+      <ul style="margin: 8px 0 0; padding-right: 20px; color: var(--ink2); font-size: 14px;">
+        <li>שיפור מבנה ה־CRM והמערכות הקיימות</li>
+        <li>ניקוי דאטה, ביטול כפילויות ותיקון לוגיקות</li>
+        <li>בניית תהליכי עבודה ברורים בתוך המערכת</li>
+        <li>יצירת אוטומציות שמקלות על הצוות</li>
+      </ul>
+      <h3 style="margin-top: 18px; font-size: 16px;">מסלול 2 — בנייה מלאה של מערכת תפעול מותאמת אישית</h3>
+      <ul style="margin: 8px 0 0; padding-right: 20px; color: var(--ink2); font-size: 14px;">
+        <li>אפיון מלא של התהליכים והתשתית התפעולית</li>
+        <li>בניית CRM מותאם אישית לצרכי העסק</li>
+        <li>אוטומציות עמוקות וחכמות שמחליפות עבודה ידנית</li>
+        <li>בניית דשבורדים חכמים ותשתית נתונים יציבה</li>
+      </ul>
+      <p style="font-size: 13px; color: var(--ink2); margin-top: 14px;">
+        <em>הערת שקיפות:</em>
+        שעת ייעוץ או עבודה מקצועית נעה בדרך כלל בין 350–450 ש&quot;ח,
+        בהתאם לסוג השירות (ייעוץ, Audit או בניית מערכות). העלות הכוללת נקבעת לפי היקף העבודה ומורכבות
+        התהליכים — ונדונה יחד לאחר פגישת ההתאמה החינמית.
+      </p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="section-header">
+      <div class="section-kicker">אודות Ops Wizards</div>
+      <h2 class="section-title gradient-text">מי עומד מאחורי הקסם</h2>
+    </div>
+    <div class="card">
+      <p>
+        Ops Wizards הוקמה על ידי <strong>אביתר יוסף</strong>, מומחה RevOps עם מעל 10 שנות ניסיון בבניית תהליכים,
+        מערכות ואוטומציות לעסקים בישראל.
+      </p>
+      <p>
+        אני משלב בין הבנה תפעולית עמוקה לבין יכולת טכנית גבוהה — ויודע לתרגם כאוס יומיומי למערכת סדורה,
+        ברורה וקלה לתפעול. לקוחות עובדים איתי כי הם רוצים מישהו שמבין את העסק לעומק, מדבר בשפה פשוטה,
+        בונה מערכות שעובדות ולא רק מציג מצגות, ולוקח אחריות על כל התהליך.
+      </p>
+      <p>(לוגואים וקייס סטאדיז — בקרוב)</p>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="section">
+    <div class="section-header">
+      <div class="section-kicker">תמחור</div>
+      <h2 class="section-title gradient-text">מתחילים בקטן — וגדלים בצורה חכמה</h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="card pricing-card">
+        <h3>Starter Audit</h3>
+        <div class="pricing-price">החל מ־₪X,XXX</div>
+        <div class="pricing-note">
+          בדיקת עומק שמראה איך העסק שלכם באמת עובד: מיפוי תהליכים, איתור חיכוכים, דוח המלצות ומפת דרכים מסודרת.
+        </div>
+        <ul>
+          <li>מיפוי תהליכים ומערכות</li>
+          <li>זיהוי צווארי בקבוק וחיכוכים</li>
+          <li>דוח המלצות ברור ומעשי</li>
+        </ul>
+        <p style="font-size: 13px; color: var(--ink2); margin-top: 10px;">
+          רוצים להבין אם זה מתאים לכם? אפשר לקבוע פגישת ייעוץ ראשונה ללא עלות — ונבחן יחד האם נדרש מיפוי מלא
+          או פתרון נקודתי.
+        </p>
+      </div>
+      <div class="card pricing-card">
+        <h3>Systems Engineering</h3>
+        <div class="pricing-price">החל מ־₪X,XXX</div>
+        <div class="pricing-note">
+          שדרוג ה־CRM והמערכות הקיימות או בנייה מלאה של מערכת תפעול מותאמת אישית מבית Ops Wizards.
+        </div>
+        <ul>
+          <li>שדרוג/בנייה של CRM ותהליכים</li>
+          <li>אוטומציות עמוקות וחכמות</li>
+          <li>חיבור מלא לכלים ולמערכות הקיימות</li>
+        </ul>
+        <p style="font-size: 13px; color: var(--ink2); margin-top: 10px;">
+          בפגישת התאמה חינמית נבין יחד אם נכון לשדרג את מה שקיים או לבנות מערכת חדשה שמותאמת בדיוק לעסק שלכם.
+        </p>
+      </div>
+      <div class="card pricing-card">
+        <h3>Ongoing Partner</h3>
+        <div class="pricing-price">מותאם אישית</div>
+        <div class="pricing-note">
+          ליווי חודשי שוטף לשיפור, תחזוקה ואופטימיזציה מתמשכת של כל התהליכים והמערכות.
+        </div>
+        <ul>
+          <li>שדרוגים והתאמות חודשיות</li>
+          <li>פתרון בעיות ותמיכה שוטפת</li>
+          <li>בניית פיצ'רים ואוטומציות חדשות לפי צורך</li>
+        </ul>
+        <p style="font-size: 13px; color: var(--ink2); margin-top: 10px;">
+          בפגישת היכרות חינמית נבדוק את צרכי העסק ונרכיב מסלול ליווי שמתאים לקצב ולתקציב שלכם.
+        </p>
+      </div>
+    </div>
+    <p class="pricing-disclaimer">
+      שעת ייעוץ או עבודה מקצועית נעה בדרך כלל בין 350–450 ש״ח, בהתאם לסוג השירות.
+      העלות הכוללת נקבעת לפי היקף העבודה ומורכבות התהליכים — ונדונה יחד לאחר פגישת ההתאמה החינמית.
+    </p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="section-header">
+      <div class="section-kicker">יצירת קשר</div>
+      <h2 class="section-title.gradient-text">בואו נביא סדר ובהירות לעסק שלכם</h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-sub">
+          ספרו לי בקצרה על העסק, על האתגר שאתם מתמודדים איתו, ומה הייתם רוצים לשפר.
+          פגישת הייעוץ הראשונה היא ללא עלות — כדי להבין ביחד מה הכי נכון לעסק שלכם.
+        </p>
+        <form onsubmit="handleSubmit(event)" novalidate>
+          <div class="field">
+            <label for="name">שם</label>
+            <input id="name" name="name" type="text" required aria-required="true" />
+          </div>
+          <div class="field">
+            <label for="email">אימייל</label>
+            <input id="email" name="email" type="email" required aria-required="true" />
+          </div>
+          <div class="field">
+            <label for="company">שם העסק</label>
+            <input id="company" name="company" type="text" />
+          </div>
+          <div class="field">
+            <label for="message">מה הייתם רוצים לשפר?</label>
+            <textarea id="message" name="message" required aria-required="true"></textarea>
+          </div>
+          <button class="btn-primary" type="submit">שלחו פרטים</button>
+          <div id="formStatus" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+      <div class="card">
+        <p>מעדיפים לקבוע שיחה?</p>
+        <a class="book-link" href="https://calendar.app.google/riDRyuqgH2Zv6RmLA" target="_blank" rel="noopener noreferrer">
+          קבעו שיחה ראשונה חינם ביומן שלי
+        </a>
+        <p>או במייל ישירות: <strong>eviatgad@gmail.com</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>© Ops Wizards ‏2025 — כל הזכויות שמורות</div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="https://www.linkedin.com/in/eviatar-yosef-b9b2a884/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="#privacy">מדיניות פרטיות (בקרוב)</a>
+        <a href="#terms">תנאי שימוש (בקרוב)</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileNav() {
+      const nav = document.getElementById("mobileNav");
+      const btn = document.querySelector(".menu-btn");
+      const isOpen = nav.classList.toggle("open");
+      btn.setAttribute("aria-expanded", isOpen);
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const status = document.getElementById("formStatus");
+      status.textContent = "תודה! הטופס כאן הוא דמו בשלב זה. אפשר תמיד לפנות גם במייל לכתובת eviatgad@gmail.com.";
+      status.classList.add("show");
+      e.target.reset();
+      setTimeout(() => {
+        status.classList.remove("show");
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
