@@ -312,11 +312,7 @@
         display: block;
       }
     }
-.logo {
-  height: 28px;
-  width: auto;
-  margin-right: 6px;
-}
+
 
 .about-grid {
   display: flex;
@@ -344,10 +340,10 @@
 <body>
   <!-- NAV -->
   <header>
-    <div class="nav-left">
-  <img src="ops-wizards-logo.png" alt="Ops Wizards logo" class="logo" />
-  <span>Ops</span> <span class="gradient-text">Wizards</span>
-</div>
+    <div class="nav">
+      <div class="nav-left">
+        <span>Ops</span> <span class="gradient-text">Wizards</span>
+      </div>
 
       <nav class="nav-links">
         <a href="#home">Home</a>
@@ -356,8 +352,10 @@
         <a href="#pricing">Pricing</a>
         <a href="#contact">Contact</a>
       </nav>
+
       <button class="menu-btn" aria-label="Menu" onclick="toggleMobileNav()">☰</button>
     </div>
+
     <div id="mobileNav" class="mobile-nav">
       <a href="#home" onclick="toggleMobileNav()">Home</a>
       <a href="#services" onclick="toggleMobileNav()">Services</a>
@@ -366,6 +364,7 @@
       <a href="#contact" onclick="toggleMobileNav()">Contact</a>
     </div>
   </header>
+
 
   <!-- HERO -->
   <section id="home" class="section">
