@@ -1090,7 +1090,13 @@
           ספרו לי בקצרה על העסק, על האתגר שאתם מתמודדים איתו, ומה הייתם רוצים לשפר.
           פגישת הייעוץ הראשונה היא ללא עלות — כדי להבין ביחד מה הכי נכון לעסק שלכם.
         </p>
-        <form onsubmit="handleSubmit(event)" novalidate>
+        <form
+  id="contactForm"
+  action="https://formspree.io/f/myzlabrj"
+  method="POST"
+  novalidate
+>
+
           <div class="field">
             <label for="name">שם</label>
             <input id="name" name="name" type="text" required aria-required="true" />
@@ -1134,26 +1140,52 @@
   </footer>
 
   <script>
-    function toggleMobileNav() {
-      const nav = document.getElementById("mobileNav");
-      const btn = document.querySelector(".menu-btn");
-      const isOpen = nav.classList.toggle("open");
-      btn.setAttribute("aria-expanded", isOpen);
-    }
+  function toggleMobileNav() {
+    const nav = document.getElementById("mobileNav");
+    const btn = document.querySelector(".menu-btn");
+    const isOpen = nav.classList.toggle("open");
+    btn.setAttribute("aria-expanded", isOpen);
+  }
 
-    function handleSubmit(e) {
+  const form = document.getElementById("contactForm");
+  const status = document.getElementById("formStatus");
+
+  if (form && status) {
+    form.addEventListener("submit", async function (e) {
       e.preventDefault();
-      const status = document.getElementById("formStatus");
-      status.textContent = "תודה! הטופס כאן הוא דמו בשלב זה. אפשר תמיד לפנות גם במייל לכתובת wizardsops@gmail.com.";
+
+      status.textContent = "שולח...";
       status.classList.add("show");
-      e.target.reset();
+
+      try {
+        const data = new FormData(form);
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: data,
+          headers: { Accept: "application/json" },
+        });
+
+        if (response.ok) {
+          // ✅ translated thank-you message
+          status.textContent = "תודה! ההודעה נשלחה בהצלחה, ואחזור אליך בהקדם.";
+          form.reset();
+        } else {
+          status.textContent = "אירעה שגיאה בשליחה. נסה/י שוב או פנו ישירות במייל.";
+        }
+      } catch (error) {
+        status.textContent = "נראה שיש בעיית תקשורת. נסה/י שוב בעוד כמה רגעים.";
+      }
+
       setTimeout(() => {
         status.classList.remove("show");
-      }, 5000);
-    }
-  </script>
+      }, 6000);
+    });
+  }
+</script>
+
 </body>
 </html>
+
 
 
 
