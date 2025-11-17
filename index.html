@@ -312,15 +312,43 @@
         display: block;
       }
     }
+.logo {
+  height: 28px;
+  width: auto;
+  margin-right: 6px;
+}
+
+.about-grid {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.about-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid var(--purple);
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+    
   </style>
 </head>
 <body>
   <!-- NAV -->
   <header>
-    <div class="nav">
-      <div class="nav-left">
-        <span>Ops</span> <span class="gradient-text">Wizards</span>
-      </div>
+    <div class="nav-left">
+  <img src="ops-wizards-logo.png" alt="Ops Wizards logo" class="logo" />
+  <span>Ops</span> <span class="gradient-text">Wizards</span>
+</div>
+
       <nav class="nav-links">
         <a href="#home">Home</a>
         <a href="#services">Services</a>
@@ -424,15 +452,29 @@
       <div class="section-kicker">About Ops Wizards</div>
       <h2 class="section-title gradient-text">Who’s behind the magic</h2>
     </div>
-    <div class="card">
+    <div class="card about-card">
+  <div class="about-grid">
+    <div class="about-photo-wrapper">
+      <img
+        src="founder-eviatar.jpg"
+        alt="Photo of Eviatar Yosef"
+        class="about-photo"
+      />
+    </div>
+
+    <div>
       <p style="color: var(--ink2); font-size: 15px;">
         Founded by <strong>Eviatar Yosef</strong>, a RevOps leader with 10+ years in Israel’s tech industry.
         Ops Wizards helps SMBs and growing teams design structure, automate workflows, and scale with confidence.
       </p>
+
       <p style="color: var(--ink2); font-size: 13px; font-style: italic; margin-top: 10px;">
         (Case studies &amp; logos — coming soon)
       </p>
     </div>
+  </div>
+</div>
+
   </section>
 
   <!-- PRICING PLACEHOLDER -->
