@@ -301,7 +301,21 @@
       height: auto;
       display: block;
     }
-    
+    .platform-badge {
+  filter: drop-shadow(0 1px 4px rgba(15, 23, 42, 0.18));
+}
+
+.platform-icon {
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.platform-icon.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
     /* Slider controls */
     .slider-container {
       margin-top: 20px;
@@ -1083,269 +1097,288 @@
   </footer>
 
   <script>
-    // ===== CHAOS TO CLARITY INTERACTIVE SYSTEM =====
+  // ===== CHAOS TO CLARITY INTERACTIVE SYSTEM =====
+  
+  // Dot configuration
+  const dotCount = 8;
+  const chaosPositions = [
+    { x: 50, y: 30 }, { x: 80, y: 70 }, { x: 30, y: 80 }, { x: 120, y: 40 },
+    { x: 90, y: 20 }, { x: 140, y: 65 }, { x: 60, y: 50 }, { x: 110, y: 85 }
+  ];
+  
+  // Platform icons - using emoji as lightweight alternative to logo images
+  const platforms = [
+    { name: 'Google Sheets', emoji: '📊', color: '#0F9D58' },
+    { name: 'Gmail', emoji: '📧', color: '#EA4335' },
+    { name: 'HubSpot', emoji: '🔶', color: '#FF7A59' },
+    { name: 'WhatsApp', emoji: '💬', color: '#25D366' },
+    { name: 'Monday.com', emoji: '📅', color: '#FF3D57' },
+    { name: 'Salesforce', emoji: '☁️', color: '#00A1E0' },
+    { name: 'Slack', emoji: '💼', color: '#4A154B' },
+    { name: 'Zapier', emoji: '⚡', color: '#FF4A00' }
+  ];
+  
+  // Hub position & circle layout
+  const hubX = 200;
+  const hubY = 60;
+  const radius = 38;              // slightly smaller circle so nothing touches edges
+  const iconRingRadius = radius + 14; // where the icon badges will sit
+  
+  const organizedPositions = [];
+  for (let i = 0; i < dotCount; i++) {
+    const angle = (i / dotCount) * Math.PI * 2 - Math.PI / 2;
+    organizedPositions.push({
+      x: hubX + Math.cos(angle) * radius,
+      y: hubY + Math.sin(angle) * radius
+    });
+  }
+  
+  // Create dots / lines / icons
+  const dotsGroup   = document.getElementById('dots');
+  const linesGroup  = document.getElementById('lines');
+  const iconsGroup  = document.getElementById('icons');
+  const dots   = [];
+  const lines  = [];
+  const badges = [];
+  const icons  = [];
+  
+  for (let i = 0; i < dotCount; i++) {
+    // Dot
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('r', '6');
+    circle.setAttribute('fill', '#cbd5e1');
+    circle.setAttribute('cx', chaosPositions[i].x);
+    circle.setAttribute('cy', chaosPositions[i].y);
+    circle.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    dotsGroup.appendChild(circle);
+    dots.push(circle);
     
-    // Dot configuration
-    const dotCount = 8;
-    const chaosPositions = [
-      { x: 50, y: 30 }, { x: 80, y: 70 }, { x: 30, y: 80 }, { x: 120, y: 40 },
-      { x: 90, y: 20 }, { x: 140, y: 65 }, { x: 60, y: 50 }, { x: 110, y: 85 }
-    ];
+    // Line from hub to dot
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('stroke', 'url(#lineGradient)');
+    line.setAttribute('stroke-width', '2');
+    line.setAttribute('opacity', '0');
+    line.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    linesGroup.appendChild(line);
+    lines.push(line);
     
-    // Platform icons - using emoji as lightweight alternative to logo images
-    const platforms = [
-      { name: 'Google Sheets', emoji: '📊', color: '#0F9D58' },
-      { name: 'Gmail', emoji: '📧', color: '#EA4335' },
-      { name: 'HubSpot', emoji: '🔶', color: '#FF7A59' },
-      { name: 'WhatsApp', emoji: '💬', color: '#25D366' },
-      { name: 'Monday.com', emoji: '📅', color: '#FF3D57' },
-      { name: 'Salesforce', emoji: '☁️', color: '#00A1E0' },
-      { name: 'Slack', emoji: '💼', color: '#4A154B' },
-      { name: 'Zapier', emoji: '⚡', color: '#FF4A00' }
-    ];
+    // Icon badge (background circle)
+    const badge = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    badge.setAttribute('r', '13');
+    badge.setAttribute('fill', '#ffffff');
+    badge.setAttribute('stroke', platforms[i].color);
+    badge.setAttribute('stroke-width', '1.2');
+    badge.setAttribute('opacity', '0');
+    badge.classList.add('platform-badge');
+    iconsGroup.appendChild(badge);
+    badges.push(badge);
     
-    // Calculate organized positions (circle around hub)
-    const hubX = 200;
-    const hubY = 60;
-    const radius = 50;
-    const organizedPositions = [];
-    for (let i = 0; i < dotCount; i++) {
-      const angle = (i / dotCount) * Math.PI * 2 - Math.PI / 2;
-      organizedPositions.push({
-        x: hubX + Math.cos(angle) * radius,
-        y: hubY + Math.sin(angle) * radius
-      });
-    }
+    // Emoji icon on top
+    const icon = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    icon.setAttribute('font-size', '14');
+    icon.setAttribute('text-anchor', 'middle');
+    icon.setAttribute('dominant-baseline', 'middle');
+    icon.classList.add('platform-icon');
+    icon.textContent = platforms[i].emoji;
     
-    // Create dots
-    const dotsGroup = document.getElementById('dots');
-    const linesGroup = document.getElementById('lines');
-    const iconsGroup = document.getElementById('icons');
-    const dots = [];
-    const lines = [];
-    const icons = [];
+    const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+    title.textContent = platforms[i].name;
+    icon.appendChild(title);
     
-    for (let i = 0; i < dotCount; i++) {
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('r', '6');
-      circle.setAttribute('fill', '#cbd5e1');
-      circle.setAttribute('cx', chaosPositions[i].x);
-      circle.setAttribute('cy', chaosPositions[i].y);
-      circle.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-      dotsGroup.appendChild(circle);
-      dots.push(circle);
+    iconsGroup.appendChild(icon);
+    icons.push(icon);
+  }
+  
+  const hub        = document.getElementById('hub');
+  const slider     = document.getElementById('systemSlider');
+  const organizeBtn = document.getElementById('organizeBtn');
+  const resetBtn    = document.getElementById('resetBtn');
+  const statusText  = document.getElementById('statusText');
+  
+  let isAnimating = false;
+  let autoPlayInterval = null;
+  
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
+  
+  // Update system based on progress (0–100)
+  function updateSystem(progress) {
+    const t = progress / 100;
+    
+    dots.forEach((dot, i) => {
+      const startX = chaosPositions[i].x;
+      const startY = chaosPositions[i].y;
+      const endX   = organizedPositions[i].x;
+      const endY   = organizedPositions[i].y;
       
-      // Create line for each dot
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line.setAttribute('stroke', 'url(#lineGradient)');
-      line.setAttribute('stroke-width', '2');
-      line.setAttribute('opacity', '0');
-      line.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-      linesGroup.appendChild(line);
-      lines.push(line);
+      const x = startX + (endX - startX) * t;
+      const y = startY + (endY - startY) * t;
       
-      // Create platform icon (text element for emoji)
-      const icon = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      icon.setAttribute('font-size', '16');
-      icon.setAttribute('text-anchor', 'middle');
-      icon.setAttribute('dominant-baseline', 'middle');
-      icon.classList.add('platform-icon');
-      icon.textContent = platforms[i].emoji;
+      dot.setAttribute('cx', x);
+      dot.setAttribute('cy', y);
       
-      // Create title for tooltip
-      const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
-      title.textContent = platforms[i].name;
-      icon.appendChild(title);
-      
-      iconsGroup.appendChild(icon);
-      icons.push(icon);
-    }
-    
-    const hub = document.getElementById('hub');
-    const slider = document.getElementById('systemSlider');
-    const organizeBtn = document.getElementById('organizeBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const statusText = document.getElementById('statusText');
-    
-    let isAnimating = false;
-    let autoPlayInterval = null;
-    
-    // Function to update system based on progress (0-100)
-    function updateSystem(progress) {
-      const t = progress / 100;
-      
-      // Update dots position and color
-      dots.forEach((dot, i) => {
-        const startX = chaosPositions[i].x;
-        const startY = chaosPositions[i].y;
-        const endX = organizedPositions[i].x;
-        const endY = organizedPositions[i].y;
-        
-        const x = startX + (endX - startX) * t;
-        const y = startY + (endY - startY) * t;
-        
-        dot.setAttribute('cx', x);
-        dot.setAttribute('cy', y);
-        
-        // Color transition
-        if (t < 0.3) {
-          dot.setAttribute('fill', '#cbd5e1');
-        } else if (t < 0.7) {
-          dot.setAttribute('fill', '#9333ea');
-        } else {
-          dot.setAttribute('fill', '#0ea5a4');
-        }
-        
-        // Update lines
-        const line = lines[i];
-        line.setAttribute('x1', hubX);
-        line.setAttribute('y1', hubY);
-        line.setAttribute('x2', x);
-        line.setAttribute('y2', y);
-        line.setAttribute('opacity', Math.max(0, t - 0.2));
-        
-        // Update platform icons
-        const icon = icons[i];
-        // Position icon slightly outside the dot
-        const angle = (i / dotCount) * Math.PI * 2 - Math.PI / 2;
-        const iconDistance = radius + 15;
-        const iconX = hubX + Math.cos(angle) * iconDistance * t;
-        const iconY = hubY + Math.sin(angle) * iconDistance * t;
-        
-        icon.setAttribute('x', startX + (iconX - startX) * t);
-        icon.setAttribute('y', startY + (iconY - startY) * t);
-        
-        // Show icons when mostly organized (after 70% progress)
-        if (t > 0.7) {
-          icon.classList.add('visible');
-          icon.style.opacity = (t - 0.7) / 0.3;
-        } else {
-          icon.classList.remove('visible');
-          icon.style.opacity = 0;
-        }
-      });
-      
-      // Update hub
-      const hubSize = 8 * t;
-      hub.setAttribute('r', hubSize);
-      hub.setAttribute('opacity', Math.max(0, t - 0.1));
-      
-      // Update status text
-      if (t < 0.2) {
-        statusText.textContent = '🌪️ Chaos: Disconnected systems, scattered data';
-      } else if (t < 0.5) {
-        statusText.textContent = '⚙️ Organizing: Finding connections...';
-      } else if (t < 0.8) {
-        statusText.textContent = '🔗 Connecting: Building unified system...';
+      // Dot color transition
+      if (t < 0.3) {
+        dot.setAttribute('fill', '#cbd5e1');
+      } else if (t < 0.7) {
+        dot.setAttribute('fill', '#9333ea');
       } else {
-        statusText.textContent = '✨ Clarity: All platforms unified and integrated!';
+        dot.setAttribute('fill', '#0ea5a4');
+      }
+      
+      // Line from hub to dot
+      const line = lines[i];
+      line.setAttribute('x1', hubX);
+      line.setAttribute('y1', hubY);
+      line.setAttribute('x2', x);
+      line.setAttribute('y2', y);
+      line.setAttribute('opacity', Math.max(0, t - 0.2));
+      
+      // Icon ring position
+      const angle = (i / dotCount) * Math.PI * 2 - Math.PI / 2;
+      const targetX = hubX + Math.cos(angle) * iconRingRadius;
+      const targetY = hubY + Math.sin(angle) * iconRingRadius;
+      
+      // Interpolate from chaotic starting point
+      const iconX = startX + (targetX - startX) * t;
+      const iconY = startY + (targetY - startY) * t;
+      
+      const clampedY = clamp(iconY, 10, 110); // avoid hitting top/bottom of viewBox
+      
+      const badge = badges[i];
+      const icon  = icons[i];
+      
+      badge.setAttribute('cx', iconX);
+      badge.setAttribute('cy', clampedY);
+      
+      icon.setAttribute('x', iconX);
+      icon.setAttribute('y', clampedY);
+      
+      // Fade badges & icons in toward the end
+      if (t > 0.7) {
+        const opacity = (t - 0.7) / 0.3; // 0 → 1 between 70%–100%
+        badge.setAttribute('opacity', opacity);
+        icon.classList.add('visible');
+        icon.style.opacity = opacity;
+      } else {
+        badge.setAttribute('opacity', 0);
+        icon.classList.remove('visible');
+        icon.style.opacity = 0;
+      }
+    });
+    
+    // Hub size & visibility
+    const hubSize = 8 * t;
+    hub.setAttribute('r', hubSize);
+    hub.setAttribute('opacity', Math.max(0, t - 0.1));
+    
+    // Status text
+    if (t < 0.2) {
+      statusText.textContent = '🌪️ Chaos: Disconnected systems, scattered data';
+    } else if (t < 0.5) {
+      statusText.textContent = '⚙️ Organizing: Finding connections...';
+    } else if (t < 0.8) {
+      statusText.textContent = '🔗 Connecting: Building unified system...';
+    } else {
+      statusText.textContent = '✨ Clarity: All platforms unified and integrated!';
+    }
+  }
+  
+  // Slider interaction
+  slider.addEventListener('input', (e) => {
+    clearInterval(autoPlayInterval);
+    updateSystem(parseInt(e.target.value, 10));
+  });
+  
+  // Organize button animation
+  organizeBtn.addEventListener('click', () => {
+    if (isAnimating) return;
+    isAnimating = true;
+    organizeBtn.classList.add('active');
+    
+    let startProgress = parseInt(slider.value, 10);
+    const targetProgress = 100;
+    const duration = 2000;
+    const startTime = Date.now();
+    
+    function animate() {
+      const elapsed = Date.now() - startTime;
+      const t = Math.min(elapsed / duration, 1);
+      const eased = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      const currentProgress = startProgress + (targetProgress - startProgress) * eased;
+      
+      slider.value = currentProgress;
+      updateSystem(currentProgress);
+      
+      if (t < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        isAnimating = false;
+        organizeBtn.classList.remove('active');
       }
     }
     
-    // Slider interaction
-    slider.addEventListener('input', (e) => {
-      clearInterval(autoPlayInterval);
-      updateSystem(parseInt(e.target.value));
-    });
+    animate();
+  });
+  
+  // Reset button animation
+  resetBtn.addEventListener('click', () => {
+    if (isAnimating) return;
+    isAnimating = true;
+    resetBtn.classList.add('active');
     
-    // Organize button - smooth animation
-    organizeBtn.addEventListener('click', () => {
-      if (isAnimating) return;
-      isAnimating = true;
-      organizeBtn.classList.add('active');
+    let startProgress = parseInt(slider.value, 10);
+    const targetProgress = 0;
+    const duration = 1500;
+    const startTime = Date.now();
+    
+    function animate() {
+      const elapsed = Date.now() - startTime;
+      const t = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const currentProgress = startProgress + (targetProgress - startProgress) * (1 - eased);
       
-      let progress = parseInt(slider.value);
-      const targetProgress = 100;
-      const duration = 2000;
-      const startTime = Date.now();
+      slider.value = currentProgress;
+      updateSystem(currentProgress);
       
-      function animate() {
-        const elapsed = Date.now() - startTime;
-        const t = Math.min(elapsed / duration, 1);
+      if (t < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        isAnimating = false;
+        resetBtn.classList.remove('active');
+      }
+    }
+    
+    animate();
+  });
+  
+  // Auto-play demo on load
+  setTimeout(() => {
+    if (parseInt(slider.value, 10) === 0) {
+      let direction = 1;
+      let autoProgress = 0;
+      
+      autoPlayInterval = setInterval(() => {
+        autoProgress += direction * 2;
         
-        // Easing function
-        const eased = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-        
-        const currentProgress = progress + (targetProgress - progress) * eased;
-        slider.value = currentProgress;
-        updateSystem(currentProgress);
-        
-        if (t < 1) {
-          requestAnimationFrame(animate);
-        } else {
-          isAnimating = false;
-          organizeBtn.classList.remove('active');
-          
-          // Add a little shake effect to dots
-          dots.forEach(dot => {
-            dot.style.transform = 'scale(1.2)';
-            setTimeout(() => {
-              dot.style.transform = 'scale(1)';
-            }, 200);
-          });
+        if (autoProgress >= 100) {
+          autoProgress = 100;
+          direction = -1;
+        } else if (autoProgress <= 0) {
+          autoProgress = 0;
+          clearInterval(autoPlayInterval);
         }
-      }
-      
-      animate();
-    });
-    
-    // Reset button
-    resetBtn.addEventListener('click', () => {
-      if (isAnimating) return;
-      isAnimating = true;
-      resetBtn.classList.add('active');
-      
-      let progress = parseInt(slider.value);
-      const targetProgress = 0;
-      const duration = 1500;
-      const startTime = Date.now();
-      
-      function animate() {
-        const elapsed = Date.now() - startTime;
-        const t = Math.min(elapsed / duration, 1);
         
-        const eased = 1 - Math.pow(1 - t, 3);
-        
-        const currentProgress = progress + (targetProgress - progress) * eased;
-        slider.value = currentProgress;
-        updateSystem(currentProgress);
-        
-        if (t < 1) {
-          requestAnimationFrame(animate);
-        } else {
-          isAnimating = false;
-          resetBtn.classList.remove('active');
-        }
-      }
-      
-      animate();
-    });
-    
-    // Auto-play on load (subtle demo after 2 seconds)
-    setTimeout(() => {
-      if (parseInt(slider.value) === 0) {
-        let direction = 1;
-        let autoProgress = 0;
-        
-        autoPlayInterval = setInterval(() => {
-          autoProgress += direction * 2;
-          
-          if (autoProgress >= 100) {
-            autoProgress = 100;
-            direction = -1;
-          } else if (autoProgress <= 0) {
-            autoProgress = 0;
-            clearInterval(autoPlayInterval);
-          }
-          
-          slider.value = autoProgress;
-          updateSystem(autoProgress);
-        }, 50);
-      }
-    }, 2000);
-    
-    // Initialize
-    updateSystem(0);
+        slider.value = autoProgress;
+        updateSystem(autoProgress);
+      }, 50);
+    }
+  }, 2000);
+  
+  // Initialize
+  updateSystem(0);
+
     
     // ===== NAVIGATION =====
     function toggleMobileNav() {
