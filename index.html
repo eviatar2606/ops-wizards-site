@@ -665,6 +665,37 @@
     }
 
     /* ABOUT SECTION */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    
+    .about-image {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform var(--transition);
+    }
+    
+    .about-image:hover img {
+      transform: scale(1.03);
+    }
+
+    #about .card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     #about .card p {
       color: var(--ink2);
       font-size: 16px;
@@ -672,6 +703,10 @@
     }
     
     #about .card p:first-child {
+      margin: 0 0 16px 0;
+    }
+    
+    #about .card p:not(:first-child):not(:last-child) {
       margin: 0 0 16px 0;
     }
     
@@ -897,7 +932,8 @@
       .hero-grid,
       .contact-grid,
       .services-grid,
-      .pricing-grid {
+      .pricing-grid,
+      .about-grid {
         grid-template-columns: 1fr;
       }
       
@@ -1118,12 +1154,19 @@
       <div class="section-kicker">About Ops Wizards</div>
       <h2 class="section-title gradient-text">Who's behind the magic</h2>
     </div>
-    <div class="card">
-      <p>
-        Founded by <strong>Eviatar Yosef</strong>, a RevOps leader with 10+ years in Israel's tech industry.
-        Ops Wizards helps SMBs and growing teams design structure, automate workflows, and scale with confidence.
-      </p>
-      <p>(Case studies & logos — coming soon)</p>
+    <div class="about-grid">
+      <div class="about-image">
+        <img src="founder-eviatar.jpg" alt="Eviatar Yosef, Founder of Ops Wizards" loading="lazy">
+      </div>
+      <div class="card">
+        <p>
+          Founded by <strong>Eviatar Yosef</strong>, a RevOps leader with 10+ years shaping operations in Israel's tech industry. 
+        </p>
+        <p>
+          Ops Wizards helps SMBs and growing teams design structure, automate workflows, and scale with confidence. We specialize in turning operational chaos into streamlined, efficient machines. By building custom systems and automations, we cut out repetitive work, increase data visibility, and empower your team to focus on what truly matters.
+        </p>
+        <p>(Case studies & logos — coming soon)</p>
+      </div>
     </div>
   </section>
 

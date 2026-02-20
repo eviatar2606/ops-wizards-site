@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
+
 <head>
   <meta charset="UTF-8" />
   <title>Ops Wizards – הנדסת תהליכים ומערכות לעסק שלך</title>
@@ -21,18 +22,18 @@
       --shadow-lg: 0 8px 30px rgba(15, 23, 42, 0.06);
       --transition: 0.2s ease;
     }
-    
-    * { 
+
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    
-    html { 
+
+    html {
       scroll-behavior: smooth;
       scroll-padding-top: 80px;
     }
-    
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background: var(--bg);
@@ -43,19 +44,19 @@
       direction: rtl;
       text-align: right;
     }
-    
-    a { 
+
+    a {
       color: inherit;
       text-decoration: none;
       transition: var(--transition);
     }
-    
+
     img {
       max-width: 100%;
       height: auto;
       display: block;
     }
-    
+
     /* HEADER */
     header {
       position: sticky;
@@ -66,7 +67,7 @@
       border-bottom: 1px solid var(--line);
       box-shadow: var(--shadow-sm);
     }
-    
+
     .nav {
       max-width: 1200px;
       margin: 0 auto;
@@ -75,57 +76,60 @@
       align-items: center;
       justify-content: space-between;
       height: 64px;
-      flex-direction: row-reverse; /* RTL */
+      flex-direction: row-reverse;
+      /* RTL */
     }
-    
+
     .nav-left {
       font-weight: 700;
       font-size: 20px;
       letter-spacing: -0.02em;
     }
-    
+
     .gradient-text {
       background: linear-gradient(135deg, var(--purple), var(--teal));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
-    
+
     .nav-links {
       display: flex;
       gap: 32px;
       font-size: 15px;
       font-weight: 500;
-      flex-direction: row-reverse; /* RTL */
+      flex-direction: row-reverse;
+      /* RTL */
     }
-    
+
     .nav-links a {
       position: relative;
       padding: 4px 0;
     }
-    
+
     .nav-links a::after {
       content: '';
       position: absolute;
       bottom: 0;
-      right: 0; /* RTL underline */
+      right: 0;
+      /* RTL underline */
       width: 0;
       height: 2px;
       background: linear-gradient(90deg, var(--purple), var(--teal));
       transition: width var(--transition);
     }
-    
+
     .nav-links a:hover::after,
     .nav-links a:focus::after {
       width: 100%;
     }
-    
+
     .nav-links a:focus {
       outline: 2px solid var(--purple);
       outline-offset: 4px;
       border-radius: 2px;
     }
-    
+
     .menu-btn {
       display: none;
       border: none;
@@ -136,35 +140,36 @@
       color: var(--ink);
       transition: var(--transition);
     }
-    
+
     .menu-btn:hover {
       opacity: 0.7;
     }
-    
+
     .menu-btn:focus {
       outline: 2px solid var(--purple);
       outline-offset: 2px;
       border-radius: 4px;
     }
-    
+
     .mobile-nav {
       display: none;
       border-top: 1px solid var(--line);
       background: var(--bg);
       animation: slideDown 0.3s ease;
     }
-    
+
     @keyframes slideDown {
       from {
         opacity: 0;
         transform: translateY(-10px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
-    
+
     .mobile-nav a {
       display: block;
       padding: 16px 24px;
@@ -173,7 +178,7 @@
       font-weight: 500;
       transition: background var(--transition);
     }
-    
+
     .mobile-nav a:hover,
     .mobile-nav a:focus {
       background: var(--white);
@@ -185,7 +190,7 @@
       margin: 0 auto;
       padding: 80px 24px;
     }
-    
+
     /* HERO */
     .hero-grid {
       display: grid;
@@ -193,7 +198,7 @@
       gap: 48px;
       align-items: center;
     }
-    
+
     h1 {
       font-size: clamp(32px, 5vw, 48px);
       margin: 0 0 20px;
@@ -201,14 +206,14 @@
       line-height: 1.2;
       letter-spacing: -0.02em;
     }
-    
+
     .hero-sub {
       font-size: 20px;
       color: var(--ink2);
       margin-bottom: 32px;
       line-height: 1.6;
     }
-    
+
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -225,21 +230,21 @@
       box-shadow: 0 4px 14px rgba(109, 40, 217, 0.3);
       transition: all var(--transition);
     }
-    
+
     .btn-primary:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(109, 40, 217, 0.4);
     }
-    
+
     .btn-primary:active {
       transform: translateY(0);
     }
-    
+
     .btn-primary:focus {
       outline: 3px solid var(--purple);
       outline-offset: 3px;
     }
-    
+
     .card {
       background: var(--white);
       border-radius: 20px;
@@ -249,12 +254,12 @@
       transition: all var(--transition);
       text-align: right;
     }
-    
+
     .card:hover {
       box-shadow: 0 12px 40px rgba(15, 23, 42, 0.1);
       transform: translateY(-2px);
     }
-    
+
     .mini-kicker {
       font-size: 12px;
       text-transform: uppercase;
@@ -262,7 +267,7 @@
       letter-spacing: 0.1em;
       font-weight: 700;
     }
-    
+
     .mini-title {
       margin-top: 12px;
       font-size: 18px;
@@ -270,7 +275,7 @@
       line-height: 1.4;
       color: var(--ink);
     }
-    
+
     .bar-bg {
       margin-top: 20px;
       width: 100%;
@@ -280,7 +285,7 @@
       overflow: hidden;
       position: relative;
     }
-    
+
     .bar-fill {
       width: 0;
       height: 100%;
@@ -288,48 +293,76 @@
       animation: fillBar 2s ease-out forwards;
       animation-delay: 0.5s;
     }
-    
+
     @keyframes fillBar {
-      to { width: 66%; }
+      to {
+        width: 66%;
+      }
     }
-    
+
     /* CHAOS TO CLARITY VISUAL */
     .chaos-visual {
       margin-top: 20px;
       width: 100%;
       height: 80px;
     }
-    
+
     .chaos-visual svg {
       width: 100%;
       height: 100%;
     }
-    
+
     .chaos-group .dot {
       fill: #e5e7eb;
       animation: chaosPulse 2s ease-in-out infinite;
     }
-    
-    .chaos-group .dot-1 { animation-delay: 0s; }
-    .chaos-group .dot-2 { animation-delay: 0.2s; }
-    .chaos-group .dot-3 { animation-delay: 0.4s; }
-    .chaos-group .dot-4 { animation-delay: 0.6s; }
-    .chaos-group .dot-5 { animation-delay: 0.8s; }
-    .chaos-group .dot-6 { animation-delay: 1s; }
-    .chaos-group .dot-7 { animation-delay: 1.2s; }
-    .chaos-group .dot-8 { animation-delay: 1.4s; }
-    
+
+    .chaos-group .dot-1 {
+      animation-delay: 0s;
+    }
+
+    .chaos-group .dot-2 {
+      animation-delay: 0.2s;
+    }
+
+    .chaos-group .dot-3 {
+      animation-delay: 0.4s;
+    }
+
+    .chaos-group .dot-4 {
+      animation-delay: 0.6s;
+    }
+
+    .chaos-group .dot-5 {
+      animation-delay: 0.8s;
+    }
+
+    .chaos-group .dot-6 {
+      animation-delay: 1s;
+    }
+
+    .chaos-group .dot-7 {
+      animation-delay: 1.2s;
+    }
+
+    .chaos-group .dot-8 {
+      animation-delay: 1.4s;
+    }
+
     @keyframes chaosPulse {
-      0%, 100% { 
+
+      0%,
+      100% {
         fill: #e5e7eb;
         opacity: 0.6;
       }
-      50% { 
+
+      50% {
         fill: #cbd5e1;
         opacity: 1;
       }
     }
-    
+
     .chaos-line {
       stroke: #e5e7eb;
       stroke-width: 1;
@@ -337,80 +370,127 @@
       opacity: 0.3;
       animation: chaosLineFade 3s ease-in-out infinite;
     }
-    
-    .line-1 { animation-delay: 0s; }
-    .line-2 { animation-delay: 1s; }
-    .line-3 { animation-delay: 2s; }
-    
-    @keyframes chaosLineFade {
-      0%, 100% { opacity: 0.1; }
-      50% { opacity: 0.4; }
+
+    .line-1 {
+      animation-delay: 0s;
     }
-    
+
+    .line-2 {
+      animation-delay: 1s;
+    }
+
+    .line-3 {
+      animation-delay: 2s;
+    }
+
+    @keyframes chaosLineFade {
+
+      0%,
+      100% {
+        opacity: 0.1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
+    }
+
     .hub-center {
       fill: url(#hubGradient);
       animation: hubPulse 2s ease-in-out infinite;
     }
-    
+
     @keyframes hubPulse {
-      0%, 100% { 
+
+      0%,
+      100% {
         r: 6;
         opacity: 1;
       }
-      50% { 
+
+      50% {
         r: 7;
         opacity: 0.9;
       }
     }
-    
+
     .satellite {
       fill: #6d28d9;
-      animation: satelliteGlow 2s.ease-in-out infinite;
+      animation: satelliteGlow 2s ease-in-out infinite;
     }
-    
-    .sat-1 { animation-delay: 0s; }
-    .sat-2 { animation-delay: 0.5s; }
-    .sat-3 { animation-delay: 1s; }
-    .sat-4 { animation-delay: 1.5s; }
-    
+
+    .sat-1 {
+      animation-delay: 0s;
+    }
+
+    .sat-2 {
+      animation-delay: 0.5s;
+    }
+
+    .sat-3 {
+      animation-delay: 1s;
+    }
+
+    .sat-4 {
+      animation-delay: 1.5s;
+    }
+
     @keyframes satelliteGlow {
-      0%, 100% { 
+
+      0%,
+      100% {
         fill: #6d28d9;
         opacity: 0.7;
       }
-      50% { 
+
+      50% {
         fill: #0ea5a4;
         opacity: 1;
       }
     }
-    
+
     .clarity-line {
       stroke: url(#lineGradient);
       stroke-width: 1.5;
       opacity: 0;
       animation: clarityLineDraw 3s ease-in-out infinite;
     }
-    
-    .cl-1 { animation-delay: 0.5s; }
-    .cl-2 { animation-delay: 1s; }
-    .cl-3 { animation-delay: 1.5s; }
-    .cl-4 { animation-delay: 2s; }
-    
+
+    .cl-1 {
+      animation-delay: 0.5s;
+    }
+
+    .cl-2 {
+      animation-delay: 1s;
+    }
+
+    .cl-3 {
+      animation-delay: 1.5s;
+    }
+
+    .cl-4 {
+      animation-delay: 2s;
+    }
+
     @keyframes clarityLineDraw {
-      0%, 30% { 
+
+      0%,
+      30% {
         opacity: 0;
         stroke-dasharray: 0, 100;
       }
-      60%, 100% { 
+
+      60%,
+      100% {
         opacity: 0.8;
         stroke-dasharray: 100, 0;
       }
     }
-    
+
     .arrow-group {
       opacity: 0.5;
     }
-    
+
     .mini-caption {
       margin-top: 14px;
       font-size: 14px;
@@ -426,7 +506,7 @@
       letter-spacing: -0.02em;
       line-height: 1.2;
     }
-    
+
     .section-kicker {
       font-size: 13px;
       text-transform: uppercase;
@@ -435,18 +515,18 @@
       margin-bottom: 8px;
       font-weight: 700;
     }
-    
+
     .section-header {
       margin-bottom: 40px;
     }
-    
+
     /* PROBLEMS SECTION */
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
-    
+
     .pill {
       font-size: 15px;
       padding: 24px;
@@ -456,13 +536,13 @@
       box-shadow: var(--shadow-md);
       transition: all var(--transition);
     }
-    
+
     .pill:hover {
       border-color: var(--purple);
       box-shadow: 0 8px 24px rgba(109, 40, 217, 0.15);
       transform: translateY(-2px);
     }
-    
+
     .pill strong {
       display: block;
       margin-bottom: 8px;
@@ -476,27 +556,28 @@
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 24px;
     }
-    
+
     .services-card h3 {
       margin: 0 0 16px;
       font-size: 22px;
       font-weight: 700;
       color: var(--ink);
     }
-    
+
     .services-card ul {
       margin: 0;
-      padding-right: 20px; /* RTL */
+      padding-right: 20px;
+      /* RTL */
       padding-left: 0;
       color: var(--ink2);
       font-size: 15px;
       line-height: 1.8;
     }
-    
+
     .services-card li {
       margin-bottom: 8px;
     }
-    
+
     .services-card li:last-child {
       margin-bottom: 0;
     }
@@ -510,16 +591,51 @@
     }
 
     /* ABOUT SECTION */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-image {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform var(--transition);
+    }
+
+    .about-image:hover img {
+      transform: scale(1.03);
+    }
+
+    #about .card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     #about .card p {
       color: var(--ink2);
       font-size: 16px;
       line-height: 1.8;
     }
-    
+
     #about .card p:first-child {
       margin: 0 0 16px 0;
     }
-    
+
+    #about .card p:not(:first-child):not(:last-child) {
+      margin: 0 0 16px 0;
+    }
+
     #about .card p:last-child {
       color: var(--ink3);
       font-size: 14px;
@@ -533,15 +649,15 @@
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 24px;
     }
-    
+
     .pricing-card {
       position: relative;
     }
-    
+
     .pricing-card:nth-child(2) {
       border: 2px solid var(--purple);
     }
-    
+
     .pricing-card:nth-child(2)::before {
       content: 'POPULAR';
       position: absolute;
@@ -556,14 +672,14 @@
       font-weight: 700;
       letter-spacing: 0.05em;
     }
-    
+
     .pricing-card h3 {
       margin: 0 0 12px;
       font-size: 22px;
       font-weight: 700;
       color: var(--ink);
     }
-    
+
     .pricing-price {
       font-size: 32px;
       font-weight: 800;
@@ -573,27 +689,28 @@
       background-clip: text;
       color: transparent;
     }
-    
+
     .pricing-note {
       font-size: 14px;
       color: var(--ink3);
       margin-bottom: 20px;
       line-height: 1.5;
     }
-    
+
     .pricing-card ul {
       margin: 0;
-      padding-right: 20px; /* RTL */
+      padding-right: 20px;
+      /* RTL */
       padding-left: 0;
       font-size: 14px;
       color: var(--ink2);
       line-height: 1.8;
     }
-    
+
     .pricing-card li {
       margin-bottom: 8px;
     }
-    
+
     .pricing-disclaimer {
       margin-top: 24px;
       font-size: 14px;
@@ -609,14 +726,14 @@
       gap: 32px;
       align-items: flex-start;
     }
-    
+
     .contact-sub {
       font-size: 16px;
       color: var(--ink2);
       margin-bottom: 24px;
       line-height: 1.6;
     }
-    
+
     form label {
       display: block;
       font-size: 14px;
@@ -624,8 +741,9 @@
       margin-bottom: 8px;
       font-weight: 600;
     }
-    
-    input, textarea {
+
+    input,
+    textarea {
       width: 100%;
       border-radius: 12px;
       border: 1px solid var(--line);
@@ -634,24 +752,26 @@
       font-size: 15px;
       transition: all var(--transition);
       background: var(--white);
-      text-align: right; /* RTL */
+      text-align: right;
+      /* RTL */
     }
-    
-    input:focus, textarea:focus {
+
+    input:focus,
+    textarea:focus {
       outline: none;
       border-color: var(--purple);
       box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.1);
     }
-    
+
     textarea {
       resize: vertical;
       min-height: 120px;
     }
-    
+
     .field {
       margin-bottom: 20px;
     }
-    
+
     .book-link {
       font-size: 16px;
       font-weight: 600;
@@ -661,12 +781,12 @@
       display: inline-block;
       transition: var(--transition);
     }
-    
+
     .book-link:hover {
       color: var(--teal);
       border-color: var(--teal);
     }
-    
+
     #formStatus {
       margin-top: 16px;
       font-size: 14px;
@@ -676,18 +796,18 @@
       color: #166534;
       display: none;
     }
-    
+
     #formStatus.show {
       display: block;
     }
-    
+
     #contact .card p {
       margin: 0 0 16px 0;
       font-size: 15px;
       color: var(--ink2);
       line-height: 1.6;
     }
-    
+
     #contact .card p:last-child {
       margin: 0;
     }
@@ -699,7 +819,7 @@
       font-size: 14px;
       background: var(--white);
     }
-    
+
     .footer-inner {
       max-width: 1200px;
       margin: 0 auto;
@@ -709,19 +829,19 @@
       flex-wrap: wrap;
       gap: 16px;
     }
-    
+
     .footer-links {
       display: flex;
       flex-wrap: wrap;
       gap: 24px;
     }
-    
+
     .footer-links a {
       color: var(--ink3);
       font-weight: 500;
       transition: var(--transition);
     }
-    
+
     .footer-links a:hover {
       color: var(--purple);
     }
@@ -740,105 +860,108 @@
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
+
       .hero-grid,
       .contact-grid,
       .services-grid,
-      .pricing-grid {
+      .pricing-grid,
+      .about-grid {
         grid-template-columns: 1fr;
       }
-      
+
       .section {
         padding: 56px 20px;
       }
-      
+
       .nav {
         padding: 0 20px;
       }
-      
+
       .nav-links {
         display: none;
       }
-      
+
       .menu-btn {
         display: block;
       }
-      
+
       .mobile-nav.open {
         display: block;
       }
-      
+
       h1 {
         margin-bottom: 16px;
       }
-      
+
       .hero-sub {
         font-size: 18px;
         margin-bottom: 24px;
       }
-      
+
       .section-title {
         margin-bottom: 8px;
       }
-      
+
       .grid-2 {
         grid-template-columns: 1fr;
       }
-      
+
       .footer-inner {
         flex-direction: column;
         align-items: flex-start;
       }
     }
-    
+
     @media (max-width: 480px) {
       .nav {
         height: 56px;
       }
-      
+
       .nav-left {
         font-size: 18px;
       }
-      
+
       .btn-primary {
         width: 100%;
       }
-      
+
       .card {
         padding: 20px;
       }
     }
   </style>
 </head>
+
 <body>
   <!-- NAV -->
   <header>
     <div class="nav">
-  <div class="nav-left">
-    <span>Ops</span> <span class="gradient-text">Wizards</span>
-  </div>
-  <nav class="nav-links" aria-label="Main navigation">
-    <a href="#home">דף הבית</a>
-    <a href="#services">שירותים</a>
-    <a href="#about">אודות</a>
-    <a href="#pricing">תמחור</a>
-    <a href="#contact">יצירת קשר</a>
-  </nav>
+      <div class="nav-left">
+        <span>Ops</span> <span class="gradient-text">Wizards</span>
+      </div>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#home">דף הבית</a>
+        <a href="#services">שירותים</a>
+        <a href="#about">אודות</a>
+        <a href="#pricing">תמחור</a>
+        <a href="#contact">יצירת קשר</a>
+      </nav>
 
-  <div class="lang-toggle">
-    <a href="/" class="lang-link">English</a>
-  </div>
+      <div class="lang-toggle">
+        <a href="/" class="lang-link">English</a>
+      </div>
 
-  <button class="menu-btn" aria-label="תפריט נייד" aria-expanded="false" onclick="toggleMobileNav()">☰</button>
-</div>
+      <button class="menu-btn" aria-label="תפריט נייד" aria-expanded="false" onclick="toggleMobileNav()">☰</button>
+    </div>
 
     <nav id="mobileNav" class="mobile-nav" aria-label="Mobile navigation">
-  <a href="#home" onclick="toggleMobileNav()">דף הבית</a>
-  <a href="#services" onclick="toggleMobileNav()">שירותים</a>
-  <a href="#about" onclick="toggleMobileNav()">אודות</a>
-  <a href="#pricing" onclick="toggleMobileNav()">תמחור</a>
-  <a href="#contact" onclick="toggleMobileNav()">יצירת קשר</a>
-  <a href="/" onclick="toggleMobileNav()">English</a>
-</nav>
+      <a href="#home" onclick="toggleMobileNav()">דף הבית</a>
+      <a href="#services" onclick="toggleMobileNav()">שירותים</a>
+      <a href="#about" onclick="toggleMobileNav()">אודות</a>
+      <a href="#pricing" onclick="toggleMobileNav()">תמחור</a>
+      <a href="#contact" onclick="toggleMobileNav()">יצירת קשר</a>
+      <a href="/" onclick="toggleMobileNav()">English</a>
+    </nav>
 
   </header>
 
@@ -872,7 +995,7 @@
                 <stop offset="100%" style="stop-color:#0ea5a4;stop-opacity:0.6" />
               </linearGradient>
             </defs>
-            
+
             <!-- Chaos side -->
             <g class="chaos-group">
               <circle cx="20" cy="25" r="4" class="dot dot-1" />
@@ -887,13 +1010,13 @@
               <line x1="45" y1="55" x2="50" y2="65" class="chaos-line line-2" />
               <line x1="60" y1="40" x2="75" y2="20" class="chaos-line line-3" />
             </g>
-            
+
             <!-- Arrow -->
             <g class="arrow-group">
               <line x1="130" y1="40" x2="270" y2="40" stroke="#cbd5e1" stroke-width="2" />
               <polygon points="270,40 260,35 260,45" fill="#cbd5e1" />
             </g>
-            
+
             <!-- Clarity side -->
             <g class="clarity-group">
               <circle cx="350" cy="40" r="6" class="hub-center" />
@@ -1012,17 +1135,26 @@
       <div class="section-kicker">אודות Ops Wizards</div>
       <h2 class="section-title gradient-text">מי עומד מאחורי הקסם</h2>
     </div>
-    <div class="card">
-      <p>
-        Ops Wizards הוקמה על ידי <strong>אביתר יוסף</strong>, מומחה RevOps עם מעל 10 שנות ניסיון בבניית תהליכים,
-        מערכות ואוטומציות לעסקים בישראל.
-      </p>
-      <p>
-        אני משלב בין הבנה תפעולית עמוקה לבין יכולת טכנית גבוהה — ויודע לתרגם כאוס יומיומי למערכת סדורה,
-        ברורה וקלה לתפעול. לקוחות עובדים איתי כי הם רוצים מישהו שמבין את העסק לעומק, מדבר בשפה פשוטה,
-        בונה מערכות שעובדות ולא רק מציג מצגות, ולוקח אחריות על כל התהליך.
-      </p>
-      <p>(לוגואים וקייס סטאדיז — בקרוב)</p>
+    <div class="about-grid">
+      <div class="about-image">
+        <img src="founder-eviatar.jpg" alt="אביתר יוסף, מייסד Ops Wizards" loading="lazy">
+      </div>
+      <div class="card">
+        <p>
+          Ops Wizards הוקמה על ידי <strong>אביתר יוסף</strong>, מומחה RevOps עם מעל 10 שנות ניסיון בבניית תהליכים,
+          מערכות ואוטומציות לעסקים בישראל.
+        </p>
+        <p>
+          אני משלב בין הבנה תפעולית עמוקה לבין יכולת טכנית גבוהה — ויודע לתרגם כאוס יומיומי למערכת סדורה, ברורה וקלה
+          לתפעול. המומחיות שלנו ב־Ops Wizards היא יצירת אוטומציות יעילות שחוסכות זמן יקר ומאפשרות לצוות שלך להתמקד
+          בצמיחה.
+        </p>
+        <p>
+          לקוחות עובדים איתי כי הם רוצים מישהו שמבין את העסק לעומק, מדבר בשפה פשוטה, בונה מערכות ואוטומציות שעובדות ולא
+          רק מציג מצגות, ולוקח אחריות על כל התהליך.
+        </p>
+        <p>(לוגואים וקייס סטאדיז — בקרוב)</p>
+      </div>
     </div>
   </section>
 
@@ -1098,12 +1230,7 @@
           ספרו לי בקצרה על העסק, על האתגר שאתם מתמודדים איתו, ומה הייתם רוצים לשפר.
           פגישת הייעוץ הראשונה היא ללא עלות — כדי להבין ביחד מה הכי נכון לעסק שלכם.
         </p>
-        <form
-  id="contactForm"
-  action="https://formspree.io/f/myzlabrj"
-  method="POST"
-  novalidate
->
+        <form id="contactForm" action="https://formspree.io/f/myzlabrj" method="POST" novalidate>
 
           <div class="field">
             <label for="name">שם</label>
@@ -1127,7 +1254,8 @@
       </div>
       <div class="card">
         <p>מעדיפים לקבוע שיחה?</p>
-        <a class="book-link" href="https://calendar.app.google/wTaEpLZ4pQztK1fP9" target="_blank" rel="noopener noreferrer">
+        <a class="book-link" href="https://calendar.app.google/wTaEpLZ4pQztK1fP9" target="_blank"
+          rel="noopener noreferrer">
           קבעו שיחה ראשונה חינם ביומן שלי
         </a>
         <p>או במייל ישירות: <strong>wizardsops@gmail.com</strong></p>
@@ -1140,7 +1268,8 @@
     <div class="footer-inner">
       <div>© Ops Wizards ‏2025 — כל הזכויות שמורות</div>
       <nav class="footer-links" aria-label="Footer navigation">
-        <a href="https://www.linkedin.com/in/eviatar-yosef-b9b2a884/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/eviatar-yosef-b9b2a884/" target="_blank"
+          rel="noopener noreferrer">LinkedIn</a>
         <a href="#privacy">מדיניות פרטיות (בקרוב)</a>
         <a href="#terms">תנאי שימוש (בקרוב)</a>
       </nav>
@@ -1148,54 +1277,49 @@
   </footer>
 
   <script>
-  function toggleMobileNav() {
-    const nav = document.getElementById("mobileNav");
-    const btn = document.querySelector(".menu-btn");
-    const isOpen = nav.classList.toggle("open");
-    btn.setAttribute("aria-expanded", isOpen);
-  }
+    function toggleMobileNav() {
+      const nav = document.getElementById("mobileNav");
+      const btn = document.querySelector(".menu-btn");
+      const isOpen = nav.classList.toggle("open");
+      btn.setAttribute("aria-expanded", isOpen);
+    }
 
-  const form = document.getElementById("contactForm");
-  const status = document.getElementById("formStatus");
+    const form = document.getElementById("contactForm");
+    const status = document.getElementById("formStatus");
 
-  if (form && status) {
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
+    if (form && status) {
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-      status.textContent = "שולח...";
-      status.classList.add("show");
+        status.textContent = "שולח...";
+        status.classList.add("show");
 
-      try {
-        const data = new FormData(form);
-        const response = await fetch(form.action, {
-          method: "POST",
-          body: data,
-          headers: { Accept: "application/json" },
-        });
+        try {
+          const data = new FormData(form);
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: data,
+            headers: { Accept: "application/json" },
+          });
 
-        if (response.ok) {
-          // ✅ translated thank-you message
-          status.textContent = "תודה! ההודעה נשלחה בהצלחה, ואחזור אליך בהקדם.";
-          form.reset();
-        } else {
-          status.textContent = "אירעה שגיאה בשליחה. נסה/י שוב או פנו ישירות במייל.";
+          if (response.ok) {
+            // ✅ translated thank-you message
+            status.textContent = "תודה! ההודעה נשלחה בהצלחה, ואחזור אליך בהקדם.";
+            form.reset();
+          } else {
+            status.textContent = "אירעה שגיאה בשליחה. נסה/י שוב או פנו ישירות במייל.";
+          }
+        } catch (error) {
+          status.textContent = "נראה שיש בעיית תקשורת. נסה/י שוב בעוד כמה רגעים.";
         }
-      } catch (error) {
-        status.textContent = "נראה שיש בעיית תקשורת. נסה/י שוב בעוד כמה רגעים.";
-      }
 
-      setTimeout(() => {
-        status.classList.remove("show");
-      }, 6000);
-    });
-  }
-</script>
+        setTimeout(() => {
+          status.classList.remove("show");
+        }, 6000);
+      });
+    }
+  </script>
 
 </body>
+
 </html>
-
-
-
-
-
-
